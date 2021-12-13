@@ -1,1 +1,1 @@
-go build -ldflags "-w" base64.go
+go build -ldflags "-s -w" base64.go
