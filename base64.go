@@ -4,7 +4,6 @@ import (
     "os"
     "bufio"
     b64 "encoding/base64"
-    "fmt"
     "errors"
     "io/ioutil"
 )
@@ -51,15 +50,20 @@ func main() {
     } else {
         stdin := bufio.NewScanner(os.Stdin)
         stdin.Scan()
-        data = stdin.Bytes()
+        data, _ = ioutil.ReadAll(os.Stdin)
     }
 
     if encode {
         out := b64.StdEncoding.EncodeToString(data)
-        fmt.Println(out)
+        os.Stdout.WriteString(out)
     } else {
-        out, _ := b64.StdEncoding.DecodeString(string(data))
-        fmt.Println(string(out))
+        out, err := b64.StdEncoding.DecodeString(string(data))
+        if err != nil {
+            os.Stderr.WriteString("invalid input.\n")
+            os.Exit(1)
+        }
+        os.Stdout.Write(out)
     }
+
     os.Exit(0)
 }
