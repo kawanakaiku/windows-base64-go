@@ -2,7 +2,6 @@ package main
 
 import (
     "os"
-    "bufio"
     b64 "encoding/base64"
     "errors"
     "io/ioutil"
@@ -48,8 +47,6 @@ func main() {
             os.Exit(1)
         }
     } else {
-        stdin := bufio.NewScanner(os.Stdin)
-        stdin.Scan()
         data, _ = ioutil.ReadAll(os.Stdin)
     }
 
