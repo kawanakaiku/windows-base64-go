@@ -54,8 +54,6 @@ func main() {
         data = stdin.Bytes()
     }
 
-    fmt.Println(string(data))
-
     if encode {
         out := b64.StdEncoding.EncodeToString(data)
         fmt.Println(out)
